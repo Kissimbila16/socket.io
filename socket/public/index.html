@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <h4>rodando o socket</h4>
+    <div id="msg"> teste</div>
+    <div><input type="text" placeholder="escreve para o socket"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var entrada = document.querySelector("input")
+        var div = document.querySelector("#msg")
+        entrada.addEventListener('change',(event)=>{
+              const sock = io();
+        sock.on('connect',()=>{
+            //if()
+            sock.emit('msg',entrada.value);
+            sock.on('msg',(msg)=>{
+                console.log(msg)
+                div.innerHTML=msg;
+            })
+        }) 
+        });
+     
+    </script>
+</body>
+
+</html>
